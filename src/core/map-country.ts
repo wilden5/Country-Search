@@ -2,6 +2,7 @@ export interface RawCountry {
   name: string;
   region: string;
   population: number;
+  flags?: { png: string; svg: string };
   capital?: string;
   subregion?: string;
   area?: number;
@@ -25,6 +26,18 @@ export interface CountryCard {
   nativeName: string;
 }
 
-export const mapCountryResponse = (_raw: RawCountry): CountryCard => {
-  throw new Error('not implemented');
+export const mapCountryResponse = (raw: RawCountry): CountryCard => {
+  return {
+    name: raw.name,
+    flagUrl: raw.flags?.png ?? '',
+    capital: raw.capital ?? '',
+    region: raw.region,
+    population: raw.population,
+    languages: raw.languages?.map((item) => item.name) ?? [],
+    currencies: raw.currencies?.map((item) => `${item.name} (${item.code})`) ?? [],
+    borders: raw.borders ?? [],
+    subregion: raw.subregion ?? '',
+    area: raw.area ?? 0,
+    nativeName: raw.nativeName ?? '',
+  };
 };

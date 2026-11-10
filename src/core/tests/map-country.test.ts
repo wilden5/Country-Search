@@ -4,6 +4,10 @@ import { mapCountryResponse, type RawCountry } from '../map-country.js';
 describe('map-country', () => {
   const spain: RawCountry = {
     name: 'Spain',
+    flags: {
+      png: 'https://flagcdn.com',
+      svg: '',
+    },
     capital: 'Madrid',
     region: 'Europe',
     population: 47351567,
@@ -26,11 +30,12 @@ describe('map-country', () => {
 
     expect(result).toEqual({
       name: 'Spain',
+      flagUrl: 'https://flagcdn.com',
       capital: 'Madrid',
       region: 'Europe',
       population: 47351567,
-      languages: [{ name: 'Spanish' }],
-      currencies: [{ code: 'EUR', name: 'Euro' }],
+      languages: ['Spanish'],
+      currencies: ['Euro (EUR)'],
       borders: ['AND', 'FRA', 'GIB', 'PRT', 'MAR'],
       subregion: 'Southern Europe',
       area: 505992,
