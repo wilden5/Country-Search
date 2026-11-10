@@ -1,0 +1,24 @@
+{
+  "name": "country-search",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilden5/Country-Search.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/wilden5/Country-Search/issues"
+  },
+  "homepage": "https://github.com/wilden5/Country-Search#readme",
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
