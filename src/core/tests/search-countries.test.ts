@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import type { RawCountry } from '../map-country.js';
-import { searchOuntries } from '../search-сountries.js';
+import { searchCountries } from '../search-сountries.js';
 
 describe('Search Countries', () => {
   const spain: RawCountry = {
@@ -34,7 +34,7 @@ describe('Search Countries', () => {
 
     vi.stubGlobal('fetch', fetchMock);
 
-    const result = await searchOuntries('spain', controller.signal);
+    const result = await searchCountries('spain', controller.signal);
 
     expect(result).toHaveLength(1);
     expect(result[0]?.name).toBe('Spain');
@@ -53,7 +53,7 @@ describe('Search Countries', () => {
 
     vi.stubGlobal('fetch', fetchMock);
 
-    const result = await searchOuntries('unknown', controller.signal);
+    const result = await searchCountries('unknown', controller.signal);
 
     expect(result).toEqual([]);
   });
@@ -67,7 +67,7 @@ describe('Search Countries', () => {
 
     vi.stubGlobal('fetch', fetchMock);
 
-    await expect(searchOuntries('spain', controller.signal)).rejects.toMatchObject({
+    await expect(searchCountries('spain', controller.signal)).rejects.toMatchObject({
       name: 'HttpError',
       status: 500,
     });
@@ -79,6 +79,6 @@ describe('Search Countries', () => {
 
     vi.stubGlobal('fetch', fetchMock);
 
-    await expect(searchOuntries('spain', controller.signal)).rejects.toThrow(TypeError);
+    await expect(searchCountries('spain', controller.signal)).rejects.toThrow(TypeError);
   });
 });
