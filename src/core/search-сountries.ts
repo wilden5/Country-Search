@@ -1,7 +1,7 @@
 import { type CountryCard, mapCountryResponse, type RawCountry } from './map-country.js';
 import { HttpError } from './http-error.js';
 
-export async function searchCountries(query: string, signal: AbortSignal): Promise<CountryCard[]> {
+export async function searchOuntries(query: string, signal: AbortSignal): Promise<CountryCard[]> {
   const response = await fetch(`https://countries.dev/name/${encodeURIComponent(query)}`, {
     signal,
   });
