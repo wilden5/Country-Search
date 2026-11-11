@@ -1,8 +1,20 @@
-import type { CountryCard } from './map-country.js';
+import { type CountryCard, mapCountryResponse, type RawCountry } from './map-country.js';
+import { HttpError } from './http-error.js';
 
-export async function searchCountries(
-  _query: string,
-  _signal: AbortSignal,
-): Promise<CountryCard[]> {
-  throw new Error('not implemented');
+export async function searchCountries(query: string, signal: AbortSignal): Promise<CountryCard[]> {
+  const response = await fetch(`https://countries.dev/name/${encodeURIComponent(query)}`, {
+    signal,
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      return [];
+    } else {
+      throw new HttpError(response.status);
+    }
+  }
+
+  const raw: RawCountry[] = await response.json();
+
+  return raw.map(mapCountryResponse);
 }
