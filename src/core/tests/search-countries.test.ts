@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import type { RawCountry } from '../map-country.js';
-import { searchCountries } from '../search-сountries.js';
+import { searchCountries } from '../search-countries.js';
 
 describe('Search Countries', () => {
   const spain: RawCountry = {

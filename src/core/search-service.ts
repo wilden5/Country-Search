@@ -1,5 +1,5 @@
 import type { CountryCard } from './map-country.js';
-import { searchCountries } from './search-сountries.js';
+import { searchCountries } from './search-countries.js';
 
 type InFlightEntry = {
   promise: Promise<CountryCard[]>;
