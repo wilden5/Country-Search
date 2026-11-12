@@ -22,13 +22,11 @@ describe('Search Service', () => {
 
   const createDeferredFetch = () => {
     let resolve!: (value: unknown) => void;
-    const fetchMock = vi.fn(
-      () =>
-        new Promise((res) => {
-          resolve = res;
-        }),
-    );
+    const promise = new Promise((res) => {
+      resolve = res;
+    });
 
+    const fetchMock = vi.fn(() => promise);
     vi.stubGlobal('fetch', fetchMock);
 
     return { fetchMock, resolve };
