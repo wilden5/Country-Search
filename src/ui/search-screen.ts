@@ -6,7 +6,7 @@ export type SearchState =
   | { status: 'loading' }
   | { status: 'empty' }
   | { status: 'results'; cards: CountryCard[] }
-  | { status: 'error'; error: Error };
+  | { status: 'error'; error: unknown };
 
 export type SearchHandlers = {
   onInput: (query: string) => void;
