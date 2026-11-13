@@ -47,7 +47,7 @@ export const startApp = (root: HTMLElement): void => {
     void runSearch(query);
   }, 300);
 
-  const { update } = renderSearchScreen(root, {
+  const { update, renderDetail } = renderSearchScreen(root, {
     onInput: (query) => {
       currentController?.abort();
       debouncedSearch(query);
@@ -56,7 +56,7 @@ export const startApp = (root: HTMLElement): void => {
       runSearch(lastQuery);
     },
     onCardClick: (card) => {
-      console.log('Card clicked:', card);
+      renderDetail(card);
     },
   });
 };

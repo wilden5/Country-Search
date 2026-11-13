@@ -97,7 +97,61 @@ export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) 
     }
   };
 
+  const renderDetail = (card: CountryCard): void => {
+    const nodes: HTMLElement[] = [];
+    const closeBtn = createText('button', 'Close');
+    closeBtn.type = 'button';
+    closeBtn.addEventListener('click', () => {
+      detailsDiv.replaceChildren();
+    });
+    nodes.push(closeBtn);
+
+    nodes.push(createText('h2', card.name));
+
+    if (card.flagUrl) {
+      const img = createText('img');
+      img.src = card.flagUrl;
+      img.alt = `Flag of ${card.name}`;
+      nodes.push(img);
+    }
+
+    if (card.capital) {
+      nodes.push(createText('p', `Capital: ${card.capital}`));
+    }
+
+    if (card.region) {
+      const regionText = card.subregion ? `${card.region}, ${card.subregion}` : card.region;
+      nodes.push(createText('p', `Region: ${regionText}`));
+    }
+
+    if (card.nativeName) {
+      nodes.push(createText('p', `Native name: ${card.nativeName}`));
+    }
+
+    if (card.population) {
+      nodes.push(createText('p', `Population: ${card.population.toLocaleString('en-US')}`));
+    }
+
+    if (card.area) {
+      nodes.push(createText('p', `Area: ${card.area.toLocaleString('en-US')} km²`));
+    }
+
+    if (card.languages.length > 0) {
+      nodes.push(createText('p', `Languages: ${card.languages.join(', ')}`));
+    }
+
+    if (card.currencies.length > 0) {
+      nodes.push(createText('p', `Currencies: ${card.currencies.join(', ')}`));
+    }
+
+    if (card.borders.length > 0) {
+      nodes.push(createText('p', `Borders: ${card.borders.join(', ')}`));
+    }
+
+    detailsDiv.replaceChildren(...nodes);
+  };
+
   const getQuery = () => {};
 
-  return { update, getQuery };
+  return { update, getQuery, renderDetail };
 };
