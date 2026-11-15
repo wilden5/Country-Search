@@ -17,14 +17,19 @@ export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) 
   input.type = 'search';
   input.placeholder = 'Search country...';
   input.autofocus = true;
+  input.className = 'search-input';
 
   const statusDiv = createText('div');
+  statusDiv.className = 'status';
 
   const listDiv = createText('div');
+  listDiv.className = 'list';
 
   const detailsDiv = createText('div');
+  detailsDiv.className = 'detail';
 
   const historyDiv = createText('div');
+  historyDiv.className = 'history';
 
   input.addEventListener('input', () => {
     handlers.onInput(input.value);
@@ -67,7 +72,10 @@ export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) 
             `Population: ${card.population.toLocaleString('en-US')}`,
           );
 
-          li.append(title, capital, region, population);
+          const text = createText('div');
+          text.className = 'card-text';
+          text.append(title, capital, region, population);
+          li.append(text);
 
           li.addEventListener('click', () => {
             handlers.onCardClick(card);
