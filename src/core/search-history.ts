@@ -45,12 +45,9 @@ export const addQuery = (storage: HistoryStorage, query: string): HistoryEntry[]
   if (!trimmed) {
     return entries;
   }
-  const last = entries[0];
-  if (last && last.query === trimmed) {
-    return entries;
-  }
+  const rest = entries.filter((entry) => entry.query !== trimmed);
   const entry: HistoryEntry = { query: trimmed, date: new Date().toISOString() };
-  const next = [entry, ...entries].slice(0, HISTORY_LIMIT);
+  const next = [entry, ...rest].slice(0, HISTORY_LIMIT);
   saveHistory(storage, next);
   return next;
 };
