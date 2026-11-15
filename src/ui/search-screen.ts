@@ -1,11 +1,13 @@
 import type { CountryCard } from '../core/map-country.js';
 import { createText } from './elements.js';
 import type { SearchState } from '../core/search-controller.js';
+import type { HistoryEntry } from '../core/search-history.js';
 
 export type SearchHandlers = {
   onInput: (query: string) => void;
   onRetry: () => void;
   onCardClick: (card: CountryCard) => void;
+  onHistoryClick: (query: string) => void;
 };
 
 export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) => {
@@ -22,11 +24,13 @@ export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) 
 
   const detailsDiv = createText('div');
 
+  const historyDiv = createText('div');
+
   input.addEventListener('input', () => {
     handlers.onInput(input.value);
   });
 
-  root.append(header, input, statusDiv, listDiv, detailsDiv);
+  root.append(header, input, statusDiv, listDiv, detailsDiv, historyDiv);
 
   const update = (state: SearchState) => {
     statusDiv.replaceChildren();
@@ -145,5 +149,30 @@ export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) 
     detailsDiv.replaceChildren(...nodes);
   };
 
-  return { update, renderDetail };
+  const renderHistory = (entries: HistoryEntry[]): void => {
+    if (entries.length === 0) {
+      historyDiv.replaceChildren();
+      return;
+    }
+
+    const list = createText('ul');
+
+    const items = entries.map((entry) => {
+      const li = createText('li');
+      const button = createText('button', entry.query);
+      button.type = 'button';
+
+      button.addEventListener('click', () => {
+        handlers.onHistoryClick(entry.query);
+      });
+
+      li.append(button);
+      return li;
+    });
+
+    list.append(...items);
+    historyDiv.replaceChildren(createText('h3', 'Recent searches'), list);
+  };
+
+  return { update, renderDetail, renderHistory };
 };

@@ -22,7 +22,7 @@ export class SearchController {
   private debouncedSearch: (query: string) => void;
 
   constructor(private deps: SearchControllerDeps) {
-    const delay = deps.debounceMs ?? 300;
+    const delay = deps.debounceMs ?? 600;
     this.debouncedSearch = debounce((query: string) => {
       void this.runSearch(query);
     }, delay);
@@ -35,6 +35,10 @@ export class SearchController {
 
   public retry(): void {
     void this.runSearch(this.lastQuery);
+  }
+
+  public search(query: string): void {
+    void this.runSearch(query);
   }
 
   private async runSearch(rawQuery: string): Promise<void> {
