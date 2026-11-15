@@ -145,7 +145,5 @@ export const renderSearchScreen = (root: HTMLElement, handlers: SearchHandlers) 
     detailsDiv.replaceChildren(...nodes);
   };
 
-  const getQuery = () => {};
-
-  return { update, getQuery, renderDetail };
+  return { update, renderDetail };
 };
