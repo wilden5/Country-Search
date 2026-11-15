@@ -1,12 +1,6 @@
 import type { CountryCard } from '../core/map-country.js';
 import { createText } from './elements.js';
-
-export type SearchState =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'empty' }
-  | { status: 'results'; cards: CountryCard[] }
-  | { status: 'error'; error: unknown };
+import type { SearchState } from '../core/search-controller.js';
 
 export type SearchHandlers = {
   onInput: (query: string) => void;
